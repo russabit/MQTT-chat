@@ -6,6 +6,10 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Message {
 
+    Message(String message) {
+        this.message = message;
+    }
+
     @PrimaryKey(autoGenerate = true)
     public int id;
 

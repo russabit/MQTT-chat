@@ -10,4 +10,8 @@ public class Contact {
     @PrimaryKey
     @NonNull
     public String name;
+
+    public Contact(@NonNull String name) {
+        this.name = name;
+    }
 }

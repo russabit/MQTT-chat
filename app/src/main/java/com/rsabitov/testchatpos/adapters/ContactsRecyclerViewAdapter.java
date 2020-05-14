@@ -9,17 +9,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.rsabitov.testchatpos.DB.Contact;
 import com.rsabitov.testchatpos.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRecyclerViewAdapter.ViewHolder> {
-    private OnViewListener onViewListener;
-    private ArrayList<String> contactsList;
+    private OnViewListener mOnViewListener;
+    private List<Contact> mContactsList;
 
-    public ContactsRecyclerViewAdapter(OnViewListener onViewListener, ArrayList<String> contactsList) {
-        this.onViewListener = onViewListener;
-        this.contactsList = contactsList;
+    public ContactsRecyclerViewAdapter(OnViewListener onViewListener) {
+        this.mOnViewListener = onViewListener;
+    }
+
+    public void setContactsList(List<Contact> contactsList) {
+        mContactsList = contactsList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -27,17 +32,18 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.contact_list_item, parent, false);
-        return new ViewHolder(view, onViewListener);
+        return new ViewHolder(view, mOnViewListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.contactName.setText(contactsList.get(position));
+        holder.contactName.setText(mContactsList.get(position).name);
     }
 
     @Override
     public int getItemCount() {
-        return contactsList.size();
+        if (mContactsList != null) return mContactsList.size();
+        else return 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -45,8 +51,8 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
         TextView contactName;
         RelativeLayout parentLayout;
 
-        public ViewHolder(@NonNull View itemView,
-                          OnViewListener onViewListener) {
+        ViewHolder(@NonNull View itemView,
+                   OnViewListener onViewListener) {
             super(itemView);
             contactName = itemView.findViewById(R.id.contact_name);
             this.onViewListener = onViewListener;

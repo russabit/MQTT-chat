@@ -2,11 +2,16 @@ package com.rsabitov.testchatpos.DB;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {Contact.class, Message.class}, version = 1)
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+@Database(entities = {Contact.class, Message.class}, version = 1, exportSchema = false)
 public abstract class ChatDatabase extends RoomDatabase {
     public abstract ContactDao getContactDao();
 
@@ -14,16 +19,46 @@ public abstract class ChatDatabase extends RoomDatabase {
 
     private static final String DATABASE_NAME = "chats_db";
 
-    private static ChatDatabase instance;
+    private static volatile ChatDatabase INSTANCE;
 
-    static ChatDatabase getInstance(final Context context) {
-        if (instance == null) {
-            instance = Room.databaseBuilder(
-                    context.getApplicationContext(),
-                    ChatDatabase.class,
-                    DATABASE_NAME
-            ).build();
+    private static final int NUMBER_OF_THREADS = 4;
+    public static final ExecutorService databaseWriteExecutor =
+            Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+
+    public static ChatDatabase getDatabase(final Context context) {
+        if (INSTANCE == null) {
+            synchronized (ChatDatabase.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = Room.databaseBuilder(
+                            context.getApplicationContext(),
+                            ChatDatabase.class,
+                            DATABASE_NAME
+                    ).addCallback(sRoomDatabaseCallback)
+                            .build();
+                }
+            }
         }
-        return instance;
+        return INSTANCE;
     }
+
+    private static RoomDatabase.Callback sRoomDatabaseCallback = new Callback() {
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+
+            databaseWriteExecutor.execute(() -> {
+                ContactDao contactDao = INSTANCE.getContactDao();
+                contactDao.insert(new Contact("Ruslan S"));
+                contactDao.insert(new Contact("Sergei B"));
+                contactDao.insert(new Contact("Aleksandr K"));
+                contactDao.insert(new Contact("Mikhail Ch"));
+
+                MessageDao messageDao = INSTANCE.getMessageDao();
+                messageDao.insert(new Message("Hi"));
+                messageDao.insert(new Message("Hello"));
+                messageDao.insert(new Message("Hey"));
+                messageDao.insert(new Message("How are you?"));
+            });
+        }
+    };
 }

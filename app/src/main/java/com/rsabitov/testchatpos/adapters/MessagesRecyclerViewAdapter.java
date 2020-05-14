@@ -9,15 +9,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.rsabitov.testchatpos.DB.Message;
 import com.rsabitov.testchatpos.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class MessagesRecyclerViewAdapter extends RecyclerView.Adapter<MessagesRecyclerViewAdapter.ViewHolder> {
-    private ArrayList<String> messagesList;
+    private List<Message> mMessagesList;
 
-    public MessagesRecyclerViewAdapter(ArrayList<String> messagesList) {
-        this.messagesList = messagesList;
+    public void setMessagesList(List<Message> messagesList) {
+        mMessagesList = messagesList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -30,19 +32,20 @@ public class MessagesRecyclerViewAdapter extends RecyclerView.Adapter<MessagesRe
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.messageName.setText(messagesList.get(position));
+        holder.messageName.setText(mMessagesList.get(position).message);
     }
 
     @Override
     public int getItemCount() {
-        return messagesList.size();
+        if (mMessagesList != null) return mMessagesList.size();
+        else return 0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView messageName;
         RelativeLayout parentLayout;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             messageName = itemView.findViewById(R.id.message);
             parentLayout = itemView.findViewById(R.id.message_layout);

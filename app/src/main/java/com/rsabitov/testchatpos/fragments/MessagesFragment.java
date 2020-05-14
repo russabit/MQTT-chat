@@ -17,9 +17,11 @@ import android.view.ViewGroup;
 import com.rsabitov.testchatpos.R;
 import com.rsabitov.testchatpos.adapters.MessagesRecyclerViewAdapter;
 
+import java.util.Objects;
+
 public class MessagesFragment extends Fragment {
 
-    private MessagesViewModel messagesViewModel;
+    private MessagesRecyclerViewAdapter mAdapter;
 
     public static MessagesFragment newInstance() {
         return new MessagesFragment();
@@ -28,16 +30,17 @@ public class MessagesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        messagesViewModel = new ViewModelProvider(getActivity()).get(MessagesViewModel.class);
+        MessagesViewModel mMessagesViewModel = new ViewModelProvider(requireActivity()).get(MessagesViewModel.class);
         View view = inflater.inflate(R.layout.messages_fragment, container, false);
         initRecyclerView(view);
+        mMessagesViewModel.getAllMessages().observe(getViewLifecycleOwner(), messages -> mAdapter.setMessagesList(messages));
         return view;
     }
 
     private void initRecyclerView(View view) {
         RecyclerView recyclerView = view.findViewById(R.id.messages_recycler);
-        MessagesRecyclerViewAdapter adapter = new MessagesRecyclerViewAdapter(messagesViewModel.listOfMessages);
-        recyclerView.setAdapter(adapter);
+        mAdapter = new MessagesRecyclerViewAdapter();
+        recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 

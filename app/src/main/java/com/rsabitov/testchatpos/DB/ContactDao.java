@@ -1,5 +1,6 @@
 package com.rsabitov.testchatpos.DB;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -13,7 +14,7 @@ import java.util.List;
 public interface ContactDao {
 
     @Query("SELECT * FROM contact")
-    List<Contact> getAll();
+    LiveData<List<Contact>> getAll();
 
     @Query("SELECT * FROM contact WHERE name = :name")
     Contact getByName(String name);
@@ -28,5 +29,5 @@ public interface ContactDao {
     void delete(Contact contact);
 
     @Query("DELETE FROM contact")
-    void deletAll();
+    void deleteAll();
 }
