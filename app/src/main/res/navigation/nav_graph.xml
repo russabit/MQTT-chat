@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_contactsFragment_to_messagesFragment"
             app:destination="@id/messages" />
+        <action
+            android:id="@+id/action_contacts_to_newContactFragment"
+            app:destination="@id/new_contact" />
     </fragment>
 
     <fragment
@@ -20,4 +23,8 @@
         android:name="com.rsabitov.testchatpos.fragments.MessagesFragment"
         android:label="MessagesFragment"
         tools:layout="@layout/messages_fragment"/>
+    <fragment
+        android:id="@+id/new_contact"
+        android:name="com.rsabitov.testchatpos.fragments.NewContactFragment"
+        android:label="NewContactFragment" />
 </navigation>

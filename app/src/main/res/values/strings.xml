@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TestChatPOS</string>
+    <string name="type_name_here_and_press_save">type name here and press save</string>
+    <string name="save">save</string>
 </resources>

@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.rsabitov.testchatpos.DB.ChatDatabase;
+import com.rsabitov.testchatpos.DB.ChatDatabase_Impl;
 import com.rsabitov.testchatpos.DB.Contact;
 import com.rsabitov.testchatpos.DB.ContactDao;
 
@@ -26,9 +27,7 @@ public class ContactRepositoryImpl implements ContactRepository {
     }
 
     @Override
-    public void insertFakeContacts(List<Contact> contactsList) {
-        for (Contact contact : contactsList) {
-            ChatDatabase.databaseWriteExecutor.execute(() -> mContactDao.insert(contact));
-        }
+    public void insert(Contact contact) {
+        ChatDatabase_Impl.databaseWriteExecutor.execute(() -> mContactDao.insert(contact));
     }
 }

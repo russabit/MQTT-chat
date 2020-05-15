@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,7 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.rsabitov.testchatpos.OnNextFragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.rsabitov.testchatpos.R;
 import com.rsabitov.testchatpos.adapters.ContactsRecyclerViewAdapter;
 
@@ -24,7 +25,6 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerViewAd
     private ContactsViewModel mContactsViewModel;
     //private MessagesViewModel mMessagesViewModel;
     private ContactsRecyclerViewAdapter mAdapter;
-    private OnNextFragment mListener;
 
     public static ContactsFragment newInstance() {
         return new ContactsFragment();
@@ -33,7 +33,6 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerViewAd
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        mListener = (OnNextFragment) getActivity();
     }
 
     @Override
@@ -44,6 +43,8 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerViewAd
         //mMessagesViewModel = new ViewModelProvider(getActivity()).get(MessagesViewModel.class);
         initRecyclerView(view);
         mContactsViewModel.getAllContacts().observe(getViewLifecycleOwner(), contacts -> mAdapter.setContactsList(contacts));
+        final FloatingActionButton fab = view.findViewById(R.id.fab);
+        fab.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.new_contact));
         return view;
     }
 
@@ -57,6 +58,6 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerViewAd
     @Override
     public void onViewClick(int position) {
         //mMessagesViewModel.setContact(mContactsViewModel.contactNames.get(position));
-        mListener.onNextFragment();
+        Navigation.findNavController(getView()).navigate(R.id.messages);
     }
 }
