@@ -29,7 +29,6 @@ public class MessagesFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         MessagesViewModel messagesViewModel = new ViewModelProvider(requireActivity()).get(MessagesViewModel.class);
         View view = inflater.inflate(R.layout.messages_fragment, container, false);
-        messagesViewModel.init();
         initRecyclerView(view);
         messagesViewModel.getAllMessages().observe(getViewLifecycleOwner(), messages -> mAdapter.setMessagesList(messages));
         Button send = view.findViewById(R.id.send_button);
