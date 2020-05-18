@@ -17,14 +17,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.rsabitov.testchatpos.DB.Contact;
 import com.rsabitov.testchatpos.R;
 import com.rsabitov.testchatpos.adapters.ContactsRecyclerViewAdapter;
+
+import java.util.List;
 
 public class ContactsFragment extends Fragment implements ContactsRecyclerViewAdapter.OnViewListener {
 
     private ContactsViewModel mContactsViewModel;
-    //private MessagesViewModel mMessagesViewModel;
+    private MessagesViewModel mMessagesViewModel;
     private ContactsRecyclerViewAdapter mAdapter;
+    private List<Contact> mContactNames;
 
     public static ContactsFragment newInstance() {
         return new ContactsFragment();
@@ -40,9 +44,12 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerViewAd
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.contacts_fragment, container, false);
         mContactsViewModel = new ViewModelProvider(this).get(ContactsViewModel.class);
-        //mMessagesViewModel = new ViewModelProvider(getActivity()).get(MessagesViewModel.class);
+        mMessagesViewModel = new ViewModelProvider(requireActivity()).get(MessagesViewModel.class);
         initRecyclerView(view);
-        mContactsViewModel.getAllContacts().observe(getViewLifecycleOwner(), contacts -> mAdapter.setContactsList(contacts));
+        mContactsViewModel.getAllContacts().observe(getViewLifecycleOwner(), contacts -> {
+            mAdapter.setContactsList(contacts);
+            mContactNames = contacts;
+        });
         final FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.new_contact));
         return view;
@@ -57,7 +64,8 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerViewAd
 
     @Override
     public void onViewClick(int position) {
-        //mMessagesViewModel.setContact(mContactsViewModel.contactNames.get(position));
+        //mContactsViewModel.setLiveContactId(mContactNames.get(position).id);
+        mMessagesViewModel.setContactId(mContactNames.get(position).id);
         Navigation.findNavController(getView()).navigate(R.id.messages);
     }
 }

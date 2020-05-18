@@ -15,19 +15,26 @@ import java.util.List;
 
 public class MessagesViewModel extends AndroidViewModel {
     private MessageRepository mMessageRepository;
-    private LiveData<List<Message>> mAllMessages;
+    private LiveData<List<Message>> mAllMessages = new MutableLiveData<>();
+    private int mContactId;
 
-    private MutableLiveData<String> selectedContact = new MutableLiveData<>();
+
+    void init() {
+        mMessageRepository = new MessageRepositoryImpl(getApplication(), mContactId);
+        mAllMessages = mMessageRepository.getMessageById(mContactId);
+    }
 
     public MessagesViewModel(@NonNull Application application) {
         super(application);
-        mMessageRepository = new MessageRepositoryImpl(application);
-        mAllMessages = mMessageRepository.getAllMessages();
     }
 
-    public MutableLiveData<String> getContact() {
-        return selectedContact;
+
+    void setContactId(int selectedContactId) {
+        mContactId = selectedContactId;
+        mMessageRepository = new MessageRepositoryImpl(getApplication(), mContactId);
+        mAllMessages = mMessageRepository.getMessageById(mContactId);
     }
+
 
     LiveData<List<Message>> getAllMessages() { return mAllMessages; }
 }

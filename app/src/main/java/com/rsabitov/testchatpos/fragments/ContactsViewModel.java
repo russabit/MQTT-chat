@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.rsabitov.testchatpos.DB.Contact;
 import com.rsabitov.testchatpos.repository.ContactRepositoryImpl;
@@ -14,6 +15,16 @@ import java.util.List;
 
 public class ContactsViewModel extends AndroidViewModel {
     private ContactRepository mContactRepository;
+
+    private MutableLiveData<Integer> mLiveContactId = new MutableLiveData<>();
+
+    MutableLiveData<Integer> getLiveContactId() {
+        return mLiveContactId;
+    }
+
+    public void setLiveContactId(int mLiveContactId) {
+        this.mLiveContactId.setValue(mLiveContactId);
+    }
 
     private LiveData<List<Contact>> mAllContacts;
 

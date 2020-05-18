@@ -7,6 +7,5 @@ import com.rsabitov.testchatpos.DB.Message;
 import java.util.List;
 
 public interface MessageRepository {
-    LiveData<List<Message>> getAllMessages();
-    /*Message getMessageById(int id);*/
+    LiveData<List<Message>> getMessageById(int id);
 }

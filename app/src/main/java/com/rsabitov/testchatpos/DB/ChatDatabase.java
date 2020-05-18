@@ -53,11 +53,12 @@ public abstract class ChatDatabase extends RoomDatabase {
                 contactDao.insert(new Contact("Aleksandr K"));
                 contactDao.insert(new Contact("Mikhail Ch"));
 
+
                 MessageDao messageDao = INSTANCE.getMessageDao();
-                messageDao.insert(new Message("Hi"));
-                messageDao.insert(new Message("Hello"));
-                messageDao.insert(new Message("Hey"));
-                messageDao.insert(new Message("How are you?"));
+                messageDao.insert(new Message("Hi", 1));
+                messageDao.insert(new Message("Hello", 2));
+                messageDao.insert(new Message("Hey", 3));
+                messageDao.insert(new Message("How are you?", 4));
             });
         }
     };

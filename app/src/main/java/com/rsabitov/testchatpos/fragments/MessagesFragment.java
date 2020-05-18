@@ -17,8 +17,6 @@ import android.view.ViewGroup;
 import com.rsabitov.testchatpos.R;
 import com.rsabitov.testchatpos.adapters.MessagesRecyclerViewAdapter;
 
-import java.util.Objects;
-
 public class MessagesFragment extends Fragment {
 
     private MessagesRecyclerViewAdapter mAdapter;
@@ -30,10 +28,13 @@ public class MessagesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        MessagesViewModel mMessagesViewModel = new ViewModelProvider(requireActivity()).get(MessagesViewModel.class);
+        ContactsViewModel contactsViewModel = new ViewModelProvider(requireActivity()).get(ContactsViewModel.class);
+        MessagesViewModel messagesViewModel = new ViewModelProvider(requireActivity()).get(MessagesViewModel.class);
+        contactsViewModel.getLiveContactId().observe(getViewLifecycleOwner(), messagesViewModel::setContactId);
         View view = inflater.inflate(R.layout.messages_fragment, container, false);
+        messagesViewModel.init();
         initRecyclerView(view);
-        mMessagesViewModel.getAllMessages().observe(getViewLifecycleOwner(), messages -> mAdapter.setMessagesList(messages));
+        messagesViewModel.getAllMessages().observe(getViewLifecycleOwner(), messages -> mAdapter.setMessagesList(messages));
         return view;
     }
 

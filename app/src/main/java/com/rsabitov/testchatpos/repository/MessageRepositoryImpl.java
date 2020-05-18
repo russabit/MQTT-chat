@@ -16,14 +16,14 @@ public class MessageRepositoryImpl implements MessageRepository {
     private MessageDao mMessageDao;
     private LiveData<List<Message>> mAllMessages;
 
-    public MessageRepositoryImpl(Application application) {
+    public MessageRepositoryImpl(Application application, int contactId) {
         ChatDatabase db = ChatDatabase.getDatabase(application);
         mMessageDao = db.getMessageDao();
-        mAllMessages = mMessageDao.getAll();
+        mAllMessages = mMessageDao.getById(contactId);
     }
 
     @Override
-    public LiveData<List<Message>> getAllMessages() {
+    public LiveData<List<Message>> getMessageById(int id) {
         return mAllMessages;
     }
 }
