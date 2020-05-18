@@ -26,4 +26,9 @@ public class MessageRepositoryImpl implements MessageRepository {
     public LiveData<List<Message>> getMessageById(int id) {
         return mAllMessages;
     }
+
+    @Override
+    public void insert(Message message) {
+        ChatDatabase.databaseWriteExecutor.execute(() -> mMessageDao.insert(message));
+    }
 }

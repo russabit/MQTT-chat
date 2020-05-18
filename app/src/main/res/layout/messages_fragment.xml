@@ -1,16 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragments.MessagesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/messages_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/messages_recycler"
-        android:background="?attr/selectableItemBackground">
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="50dp"
+        android:background="?attr/selectableItemBackground"
+        />
 
-    </androidx.recyclerview.widget.RecyclerView>
+    <RelativeLayout
+        android:id="@+id/cont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
 
-</FrameLayout>
+        <EditText
+            android:id="@+id/text_to_send"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/send_button"
+            android:hint="@string/type_in_here_to_send_message"
+            android:layout_toStartOf="@+id/send_button"
+            android:layout_alignParentStart="true"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/send_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/send"
+            android:textSize="15sp"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

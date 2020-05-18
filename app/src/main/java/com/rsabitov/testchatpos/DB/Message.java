@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Message {
 
-    Message(String message, int contactId) {
+    public Message(String message, int contactId) {
         this.message = message;
         this.contactId = contactId;
     }

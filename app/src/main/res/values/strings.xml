@@ -2,4 +2,6 @@
     <string name="app_name">TestChatPOS</string>
     <string name="type_name_here_and_press_save">type name here and press save</string>
     <string name="save">save</string>
+    <string name="send">send</string>
+    <string name="type_in_here_to_send_message">type in here to send message</string>
 </resources>

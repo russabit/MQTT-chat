@@ -30,10 +30,6 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerViewAd
     private ContactsRecyclerViewAdapter mAdapter;
     private List<Contact> mContactNames;
 
-    public static ContactsFragment newInstance() {
-        return new ContactsFragment();
-    }
-
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -64,7 +60,6 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerViewAd
 
     @Override
     public void onViewClick(int position) {
-        //mContactsViewModel.setLiveContactId(mContactNames.get(position).id);
         mMessagesViewModel.setContactId(mContactNames.get(position).id);
         Navigation.findNavController(getView()).navigate(R.id.messages);
     }

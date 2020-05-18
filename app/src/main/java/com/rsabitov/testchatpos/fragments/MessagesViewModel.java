@@ -35,6 +35,13 @@ public class MessagesViewModel extends AndroidViewModel {
         mAllMessages = mMessageRepository.getMessageById(mContactId);
     }
 
+    int getContactId() {
+        return mContactId;
+    }
 
     LiveData<List<Message>> getAllMessages() { return mAllMessages; }
+
+    void sendMessage(Message messageToSend) {
+        mMessageRepository.insert(messageToSend);
+    }
 }

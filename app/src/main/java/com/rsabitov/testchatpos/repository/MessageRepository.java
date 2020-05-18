@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface MessageRepository {
     LiveData<List<Message>> getMessageById(int id);
+    void insert(Message message);
 }
