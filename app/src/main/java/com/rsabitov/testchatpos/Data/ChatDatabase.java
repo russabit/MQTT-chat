@@ -1,4 +1,4 @@
-package com.rsabitov.testchatpos.DB;
+package com.rsabitov.testchatpos.Data;
 
 import android.content.Context;
 
@@ -7,6 +7,9 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
+
+import com.rsabitov.testchatpos.Domain.Contact;
+import com.rsabitov.testchatpos.Domain.Message;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -22,10 +25,10 @@ public abstract class ChatDatabase extends RoomDatabase {
     private static volatile ChatDatabase INSTANCE;
 
     private static final int NUMBER_OF_THREADS = 4;
-    public static final ExecutorService databaseWriteExecutor =
+    static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    public static ChatDatabase getDatabase(final Context context) {
+    static ChatDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (ChatDatabase.class) {
                 if (INSTANCE == null) {

@@ -1,4 +1,4 @@
-package com.rsabitov.testchatpos.adapters;
+package com.rsabitov.testchatpos.UI.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.rsabitov.testchatpos.DB.Message;
+import com.rsabitov.testchatpos.Domain.Message;
 import com.rsabitov.testchatpos.R;
 
 import java.util.List;

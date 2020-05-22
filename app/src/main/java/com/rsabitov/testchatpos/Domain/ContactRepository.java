@@ -1,8 +1,6 @@
-package com.rsabitov.testchatpos.repository;
+package com.rsabitov.testchatpos.Domain;
 
 import androidx.lifecycle.LiveData;
-
-import com.rsabitov.testchatpos.DB.Contact;
 
 import java.util.List;
 

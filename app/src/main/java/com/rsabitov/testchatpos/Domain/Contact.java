@@ -1,4 +1,4 @@
-package com.rsabitov.testchatpos.DB;
+package com.rsabitov.testchatpos.Domain;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;

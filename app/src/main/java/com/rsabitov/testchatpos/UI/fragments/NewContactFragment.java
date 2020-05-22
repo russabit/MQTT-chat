@@ -1,12 +1,9 @@
-package com.rsabitov.testchatpos.fragments;
+package com.rsabitov.testchatpos.UI.fragments;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -16,8 +13,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.rsabitov.testchatpos.DB.Contact;
+import com.rsabitov.testchatpos.Domain.Contact;
 import com.rsabitov.testchatpos.R;
+import com.rsabitov.testchatpos.UI.ViewModels.ContactsViewModel;
 
 public class NewContactFragment extends Fragment {
     private ContactsViewModel mContactsViewModel;

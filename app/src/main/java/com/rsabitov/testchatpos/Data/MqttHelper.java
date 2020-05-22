@@ -1,4 +1,4 @@
-package com.rsabitov.testchatpos;
+package com.rsabitov.testchatpos.Data;
 
 import android.content.Context;
 import android.util.Log;
@@ -14,12 +14,12 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 public class MqttHelper {
-    public MqttAndroidClient mqttAndroidClient;
+    private MqttAndroidClient mqttAndroidClient;
 
-    final String serverUri = "tcp://broker.mqttdashboard.com:1883"; //in the form of tcp://server:port
+    private final String serverUri = "tcp://broker.mqttdashboard.com:1883"; //in the form of tcp://server:port
 
-    final String clientId = "ruslan";
-    final String subscriptionTopic = "rossy/+";
+    private final String clientId = "ruslan";
+    private final String subscriptionTopic = "roosy/+";
     //final String username = "";
     //final String password = "";
 
@@ -37,7 +37,7 @@ public class MqttHelper {
             }
 
             @Override
-            public void messageArrived(String topic, MqttMessage message) throws Exception {
+            public void messageArrived(String topic, MqttMessage message) {
                 Log.w("mqtt", message.toString());
             }
 

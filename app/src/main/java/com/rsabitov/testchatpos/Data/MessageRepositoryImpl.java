@@ -1,14 +1,13 @@
-package com.rsabitov.testchatpos.repository;
+package com.rsabitov.testchatpos.Data;
 
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import com.rsabitov.testchatpos.DB.ChatDatabase;
-import com.rsabitov.testchatpos.DB.Contact;
-import com.rsabitov.testchatpos.DB.ContactDao;
-import com.rsabitov.testchatpos.DB.Message;
-import com.rsabitov.testchatpos.DB.MessageDao;
+import com.rsabitov.testchatpos.Data.ChatDatabase;
+import com.rsabitov.testchatpos.Data.MessageDao;
+import com.rsabitov.testchatpos.Domain.Message;
+import com.rsabitov.testchatpos.Domain.MessageRepository;
 
 import java.util.List;
 

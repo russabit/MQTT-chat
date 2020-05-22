@@ -1,4 +1,4 @@
-package com.rsabitov.testchatpos.fragments;
+package com.rsabitov.testchatpos.UI.fragments;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -12,14 +12,23 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.rsabitov.testchatpos.DB.Contact;
+import com.rsabitov.testchatpos.Domain.Contact;
+import com.rsabitov.testchatpos.Data.MqttHelper;
 import com.rsabitov.testchatpos.R;
-import com.rsabitov.testchatpos.adapters.ContactsRecyclerViewAdapter;
+import com.rsabitov.testchatpos.UI.ViewModels.ContactsViewModel;
+import com.rsabitov.testchatpos.UI.ViewModels.MessagesViewModel;
+import com.rsabitov.testchatpos.UI.adapters.ContactsRecyclerViewAdapter;
+
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.util.List;
 
@@ -48,6 +57,7 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerViewAd
         });
         final FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.new_contact));
+        startMqtt();
         return view;
     }
 
@@ -63,4 +73,33 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerViewAd
         mMessagesViewModel.setContactId(mContactNames.get(position).id);
         Navigation.findNavController(getView()).navigate(R.id.messages);
     }
+
+    private void startMqtt() {
+        MqttHelper mqttHelper = new MqttHelper(getContext());
+        mqttHelper.setCallback(new MqttCallbackExtended() {
+            @Override
+            public void connectComplete(boolean reconnect, String serverURI) {
+
+            }
+
+            @Override
+            public void connectionLost(Throwable cause) {
+
+            }
+
+            @Override
+            public void messageArrived(String topic, MqttMessage message) {
+                Log.w("Debug", message.toString());
+                Toast.makeText(getActivity(), "new message from " + topic + ": " + message.toString(), Toast.LENGTH_SHORT).show();
+                mContactsViewModel.insert(new Contact(topic));
+                //mMessagesViewModel.sendMessage(new Message(message, ));
+            }
+
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+
+            }
+        });
+    }
+
 }

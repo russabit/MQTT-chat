@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/contacts"
-        android:name="com.rsabitov.testchatpos.fragments.ContactsFragment"
+        android:name="com.rsabitov.testchatpos.UI.fragments.ContactsFragment"
         android:label="ContactsFragment"
         tools:layout="@layout/contacts_fragment">
         <action
@@ -20,11 +20,11 @@
 
     <fragment
         android:id="@+id/messages"
-        android:name="com.rsabitov.testchatpos.fragments.MessagesFragment"
+        android:name="com.rsabitov.testchatpos.UI.fragments.MessagesFragment"
         android:label="MessagesFragment"
         tools:layout="@layout/messages_fragment"/>
     <fragment
         android:id="@+id/new_contact"
-        android:name="com.rsabitov.testchatpos.fragments.NewContactFragment"
+        android:name="com.rsabitov.testchatpos.UI.fragments.NewContactFragment"
         android:label="NewContactFragment" />
 </navigation>
