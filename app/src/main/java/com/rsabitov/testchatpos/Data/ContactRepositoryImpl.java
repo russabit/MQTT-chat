@@ -29,6 +29,6 @@ public class ContactRepositoryImpl implements ContactRepository {
 
     @Override
     public void insert(Contact contact) {
-        ChatDatabase_Impl.databaseWriteExecutor.execute(() -> mContactDao.insert(contact));
+        ChatDatabase.databaseWriteExecutor.execute(() -> mContactDao.insert(contact));
     }
 }
