@@ -6,9 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.rsabitov.testchatpos.Domain.Contact;
-import com.rsabitov.testchatpos.Data.ContactRepositoryImpl;
-import com.rsabitov.testchatpos.Domain.ContactRepository;
+import com.rsabitov.testchatpos.Domain.model.Contact;
+import com.rsabitov.testchatpos.Data.repository.ContactRepositoryImpl;
+import com.rsabitov.testchatpos.Domain.repository.ContactRepository;
 
 import java.util.List;
 

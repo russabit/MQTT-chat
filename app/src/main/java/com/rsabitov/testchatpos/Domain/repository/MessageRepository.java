@@ -1,6 +1,8 @@
-package com.rsabitov.testchatpos.Domain;
+package com.rsabitov.testchatpos.Domain.repository;
 
 import androidx.lifecycle.LiveData;
+
+import com.rsabitov.testchatpos.Domain.model.Message;
 
 import java.util.List;
 

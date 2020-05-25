@@ -1,4 +1,4 @@
-package com.rsabitov.testchatpos.Domain;
+package com.rsabitov.testchatpos.Domain.model;
 
 
 import androidx.room.Entity;

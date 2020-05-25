@@ -19,7 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.rsabitov.testchatpos.Domain.Contact;
+import com.rsabitov.testchatpos.Domain.model.Contact;
 import com.rsabitov.testchatpos.Data.MqttHelper;
 import com.rsabitov.testchatpos.R;
 import com.rsabitov.testchatpos.UI.ViewModels.ContactsViewModel;

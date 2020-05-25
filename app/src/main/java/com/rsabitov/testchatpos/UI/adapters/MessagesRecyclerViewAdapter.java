@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.rsabitov.testchatpos.Domain.Message;
+import com.rsabitov.testchatpos.Domain.model.Message;
 import com.rsabitov.testchatpos.R;
 
 import java.util.List;

@@ -6,9 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.rsabitov.testchatpos.Domain.Message;
-import com.rsabitov.testchatpos.Domain.MessageRepository;
-import com.rsabitov.testchatpos.Data.MessageRepositoryImpl;
+import com.rsabitov.testchatpos.Domain.model.Message;
+import com.rsabitov.testchatpos.Domain.repository.MessageRepository;
+import com.rsabitov.testchatpos.Data.repository.MessageRepositoryImpl;
 
 import java.util.List;
 

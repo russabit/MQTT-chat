@@ -1,4 +1,4 @@
-package com.rsabitov.testchatpos.Data;
+package com.rsabitov.testchatpos.Data.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -8,7 +8,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.rsabitov.testchatpos.Domain.Contact;
+import com.rsabitov.testchatpos.Domain.model.Contact;
 
 import java.util.List;
 

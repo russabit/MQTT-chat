@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.rsabitov.testchatpos.Domain.Message;
+import com.rsabitov.testchatpos.Domain.model.Message;
 import com.rsabitov.testchatpos.R;
 import com.rsabitov.testchatpos.UI.ViewModels.MessagesViewModel;
 import com.rsabitov.testchatpos.UI.adapters.MessagesRecyclerViewAdapter;

@@ -8,8 +8,10 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.rsabitov.testchatpos.Domain.Contact;
-import com.rsabitov.testchatpos.Domain.Message;
+import com.rsabitov.testchatpos.Data.dao.ContactDao;
+import com.rsabitov.testchatpos.Data.dao.MessageDao;
+import com.rsabitov.testchatpos.Domain.model.Contact;
+import com.rsabitov.testchatpos.Domain.model.Message;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -25,10 +27,10 @@ public abstract class ChatDatabase extends RoomDatabase {
     private static volatile ChatDatabase INSTANCE;
 
     private static final int NUMBER_OF_THREADS = 4;
-    static final ExecutorService databaseWriteExecutor =
+    public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    static ChatDatabase getDatabase(final Context context) {
+    public static ChatDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (ChatDatabase.class) {
                 if (INSTANCE == null) {

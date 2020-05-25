@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.rsabitov.testchatpos.Domain.Contact;
+import com.rsabitov.testchatpos.Domain.model.Contact;
 import com.rsabitov.testchatpos.R;
 import com.rsabitov.testchatpos.UI.ViewModels.ContactsViewModel;
 
