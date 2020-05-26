@@ -8,8 +8,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.rsabitov.testchatpos.Data.dao.ContactDao;
-import com.rsabitov.testchatpos.Data.dao.MessageDao;
+import com.rsabitov.testchatpos.Data.RoomDao.ContactDao;
+import com.rsabitov.testchatpos.Data.RoomDao.MessageDao;
 import com.rsabitov.testchatpos.Domain.model.Contact;
 import com.rsabitov.testchatpos.Domain.model.Message;
 

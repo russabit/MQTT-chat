@@ -18,18 +18,18 @@ import com.rsabitov.testchatpos.R;
 import com.rsabitov.testchatpos.UI.ViewModels.ContactsViewModel;
 
 public class NewContactFragment extends Fragment {
-    private ContactsViewModel mContactsViewModel;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.newcontact_fragment, container, false);
-        mContactsViewModel = new ViewModelProvider(this).get(ContactsViewModel.class);
+        ContactsViewModel contactsViewModel = new ViewModelProvider(requireActivity()).get(ContactsViewModel.class);
 
         final EditText editText = view.findViewById(R.id.contact_name_text);
         final Button save = view.findViewById(R.id.save_button);
+
         save.setOnClickListener(v -> {
-            mContactsViewModel.insert(new Contact(editText.getText().toString()));
+            contactsViewModel.insert(new Contact(editText.getText().toString()));
             Navigation.findNavController(getView()).navigate(R.id.contacts);
         });
 

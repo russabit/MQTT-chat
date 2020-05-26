@@ -23,7 +23,20 @@ public class MqttHelper {
     //final String username = "";
     //final String password = "";
 
-    public MqttHelper(Context context) {
+    private static volatile MqttHelper INSTANCE;
+
+    public static MqttHelper getInstance(final Context context) {
+        if (INSTANCE == null) {
+            synchronized (MqttHelper.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = new MqttHelper(context);
+                }
+            }
+        }
+        return INSTANCE;
+    }
+
+    private MqttHelper(Context context) {
         mqttAndroidClient = new MqttAndroidClient(context, serverUri, clientId);
         mqttAndroidClient.setCallback(new MqttCallbackExtended() {
             @Override

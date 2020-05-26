@@ -1,4 +1,4 @@
-package com.rsabitov.testchatpos.Data.dao;
+package com.rsabitov.testchatpos.Data.RoomDao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

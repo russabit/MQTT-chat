@@ -1,14 +1,16 @@
 package com.rsabitov.testchatpos.Domain;
 
 import com.rsabitov.testchatpos.Domain.model.Contact;
+import com.rsabitov.testchatpos.Domain.model.Message;
 import com.rsabitov.testchatpos.Domain.repository.ContactRepository;
 import com.rsabitov.testchatpos.Domain.repository.MessageRepository;
 
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 public class IncomingMessageUseCase {
-    ContactRepository mContactRepository;
-    MessageRepository mMessageRepository;
+    private ContactRepository mContactRepository;
+    private MessageRepository mMessageRepository;
+    private int contactId;
 
     public IncomingMessageUseCase(ContactRepository contactRepository, MessageRepository messageRepository) {
         this.mContactRepository = contactRepository;
@@ -16,16 +18,20 @@ public class IncomingMessageUseCase {
     }
 
     public void handleIncomingMessage(String topic, MqttMessage message) {
-        mContactRepository.insert(new Contact(topic));
+        if (isExistingContact(topic)) mMessageRepository.insert(new Message(message.toString(), contactId));
+        else {
+            Contact contact = new Contact(topic);
+            mContactRepository.insert(contact);
+            mMessageRepository.insert(new Message(message.toString(), contact.id));
+        }
     }
 
-    private void checkContact(String topic) {
-        int contactId;
+    private Boolean isExistingContact(String topic) {
         String contactName = topic.substring(0, topic.length() - 1);
         for (Contact contact : mContactRepository.getAllContacts().getValue()) {
-            if (contact.name == contactName) contactId = contact.id;
-            return;
+            if (contact.name.equals(contactName)) contactId = contact.id;
+            return true;
         }
-
+        return false;
     }
 }

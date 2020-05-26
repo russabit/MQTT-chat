@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.rsabitov.testchatpos.Data.ChatDatabase;
-import com.rsabitov.testchatpos.Data.dao.MessageDao;
+import com.rsabitov.testchatpos.Data.RoomDao.MessageDao;
 import com.rsabitov.testchatpos.Domain.model.Message;
 import com.rsabitov.testchatpos.Domain.repository.MessageRepository;
 
