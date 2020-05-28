@@ -10,6 +10,7 @@ public interface ContactRepository {
     LiveData<List<Contact>> getAllContacts();
     void insert(Contact contact);
     Contact getContactByName(String name);
+    LiveData<String> getIncomingContactName();
     /*void update(Contact contact);
     void delete(Contact contact);
     void deleteAll();*/

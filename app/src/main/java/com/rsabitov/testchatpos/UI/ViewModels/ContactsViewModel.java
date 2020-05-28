@@ -38,4 +38,8 @@ public class ContactsViewModel extends AndroidViewModel {
     public LiveData<List<Contact>> getAllContacts() { return mAllContacts; }
 
     public void insert(Contact contact) { mContactRepository.insert(contact); }
+
+    public LiveData<String> getNewContact() {
+        return mContactRepository.getIncomingContactName();
+    }
 }
