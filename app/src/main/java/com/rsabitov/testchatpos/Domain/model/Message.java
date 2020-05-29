@@ -7,9 +7,9 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Message {
 
-    public Message(String message, int contactId) {
+    public Message(String message, String topic) {
         this.message = message;
-        this.contactId = contactId;
+        this.topic = topic;
     }
 
     @PrimaryKey(autoGenerate = true)
@@ -17,6 +17,5 @@ public class Message {
 
     public String message;
 
-    //@ColumnInfo(name = "contactId")
-    public int contactId;
+    public String topic;
 }

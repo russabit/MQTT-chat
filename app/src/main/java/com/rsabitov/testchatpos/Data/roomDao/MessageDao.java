@@ -1,4 +1,4 @@
-package com.rsabitov.testchatpos.Data.RoomDao;
+package com.rsabitov.testchatpos.Data.roomDao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -16,8 +16,8 @@ public interface MessageDao {
     @Query("SELECT * FROM message")
     LiveData<List<Message>> getAll();
 
-    @Query("SELECT * FROM message WHERE contactId = :id")
-    LiveData<List<Message>> getById(int id);
+    @Query("SELECT * FROM message WHERE topic = :topic")
+    LiveData<List<Message>> getById(String topic);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Message message);

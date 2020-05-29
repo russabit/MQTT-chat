@@ -9,20 +9,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.rsabitov.testchatpos.Domain.model.Contact;
+import com.rsabitov.testchatpos.Domain.model.Topic;
 import com.rsabitov.testchatpos.R;
 
 import java.util.List;
 
 public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRecyclerViewAdapter.ViewHolder> {
     private OnViewListener mOnViewListener;
-    private List<Contact> mContactsList;
+    private List<Topic> mContactsList;
 
     public ContactsRecyclerViewAdapter(OnViewListener onViewListener) {
         this.mOnViewListener = onViewListener;
     }
 
-    public void setContactsList(List<Contact> contactsList) {
+    public void setContactsList(List<Topic> contactsList) {
         mContactsList = contactsList;
         notifyDataSetChanged();
     }

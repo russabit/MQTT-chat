@@ -1,4 +1,4 @@
-package com.rsabitov.testchatpos.UI.ViewModels;
+package com.rsabitov.testchatpos.UI.viewModels;
 
 import android.app.Application;
 
@@ -15,25 +15,29 @@ import java.util.List;
 public class MessagesViewModel extends AndroidViewModel {
     private MessageRepository mMessageRepository;
     private LiveData<List<Message>> mAllMessages;
-    private int mContactId;
+    private String mTopic;
 
     public MessagesViewModel(@NonNull Application application) {
         super(application);
     }
 
-    public void setContactId(int selectedContactId) {
-        mContactId = selectedContactId;
-        mMessageRepository = new MessageRepositoryImpl(getApplication(), mContactId);
-        mAllMessages = mMessageRepository.getMessageById(mContactId);
+    public void setContactTopic(String topic) {
+        mTopic = topic;
+        mMessageRepository = new MessageRepositoryImpl(getApplication(), mTopic);
+        mAllMessages = mMessageRepository.getMessageByTopic(mTopic);
     }
 
-    public int getContactId() {
-        return mContactId;
+    public String getContactTopic() {
+        return mTopic;
     }
 
     public LiveData<List<Message>> getAllMessages() { return mAllMessages; }
 
     public void sendMessage(Message messageToSend) {
         mMessageRepository.insert(messageToSend);
+    }
+
+    public LiveData<Message> getNewMessage() {
+        return mMessageRepository.getIncomingMessage();
     }
 }

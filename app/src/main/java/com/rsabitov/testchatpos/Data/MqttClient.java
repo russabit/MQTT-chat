@@ -3,10 +3,10 @@ package com.rsabitov.testchatpos.Data;
 import android.content.Context;
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-
-import com.rsabitov.testchatpos.Domain.model.Contact;
+import com.rsabitov.testchatpos.Data.mqttDao.TopicMqttDao;
+import com.rsabitov.testchatpos.Data.mqttDao.TopicMqttDaoImpl;
+import com.rsabitov.testchatpos.Data.mqttDao.MessageMqttDao;
+import com.rsabitov.testchatpos.Data.mqttDao.MessageMqttDaoImpl;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.DisconnectedBufferOptions;
@@ -18,23 +18,33 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
-public class MqttHelper {
+public class MqttClient {
     private MqttAndroidClient mqttAndroidClient;
 
-    private String mMessage;
+    private TopicMqttDao mTopicMqttDao;
+    private MessageMqttDao mMessageMqttDao;
 
-    private ContactMqttDao mContactMqttDao;
-
-    public ContactMqttDao getContactMqttDao() {
-        if (mContactMqttDao != null) {
-            return mContactMqttDao;
+    public TopicMqttDao getContactMqttDao() {
+        if (mTopicMqttDao != null) {
+            return mTopicMqttDao;
         }
         else {
-            if (mContactMqttDao == null) {
-                mContactMqttDao = new ContactMqttDaoImpl(this);
+            if (mTopicMqttDao == null) {
+                mTopicMqttDao = new TopicMqttDaoImpl(this);
             }
         }
-        return mContactMqttDao;
+        return mTopicMqttDao;
+    }
+    public MessageMqttDao getMessageMqttDao() {
+        if (mMessageMqttDao != null) {
+            return mMessageMqttDao;
+        }
+        else {
+            if (mMessageMqttDao == null) {
+                mMessageMqttDao = new MessageMqttDaoImpl(this);
+            }
+        }
+        return mMessageMqttDao;
     }
 
     private final String serverUri = "tcp://broker.mqttdashboard.com:1883"; //in the form of tcp://server:port
@@ -44,13 +54,13 @@ public class MqttHelper {
     //final String username = "";
     //final String password = "";
 
-    private static volatile MqttHelper INSTANCE;
+    private static volatile MqttClient INSTANCE;
 
-    public static MqttHelper getInstance(final Context context) {
+    public static MqttClient getInstance(final Context context) {
         if (INSTANCE == null) {
-            synchronized (MqttHelper.class) {
+            synchronized (MqttClient.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new MqttHelper(context);
+                    INSTANCE = new MqttClient(context);
                     //INSTANCE.setCallback(onDeliveryCallback);
                 }
             }
@@ -58,32 +68,7 @@ public class MqttHelper {
         return INSTANCE;
     }
 
-    //first callback, not handling but for insertion
-/*    private static MqttCallbackExtended onDeliveryCallback = new MqttCallbackExtended() {
-        @Override
-        public void connectComplete(boolean reconnect, String serverURI) {
-
-        }
-
-        @Override
-        public void connectionLost(Throwable cause) {
-
-        }
-
-        @Override
-        public void messageArrived(String topic, MqttMessage message) throws Exception {
-            Contact contact = new Contact(topic);
-            insert(contact);
-            int contactId = getContactByName(contact.name).id;
-        }
-
-        @Override
-        public void deliveryComplete(IMqttDeliveryToken token) {
-
-        }
-    };*/
-
-    private MqttHelper(Context context) {
+    private MqttClient(Context context) {
         mqttAndroidClient = new MqttAndroidClient(context, serverUri, clientId);
         mqttAndroidClient.setCallback(new MqttCallbackExtended() {
             @Override

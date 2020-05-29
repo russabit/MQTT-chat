@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Contact {
+public class Topic {
 
     @PrimaryKey(autoGenerate = true)
     public int id;
@@ -13,7 +13,7 @@ public class Contact {
     @NonNull
     public String name;
 
-    public Contact(@NonNull String name) {
+    public Topic(@NonNull String name) {
         this.name = name;
     }
 }

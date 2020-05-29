@@ -1,35 +1,35 @@
 package com.rsabitov.testchatpos.Domain;
 
-import com.rsabitov.testchatpos.Domain.model.Contact;
+import com.rsabitov.testchatpos.Domain.model.Topic;
 import com.rsabitov.testchatpos.Domain.model.Message;
-import com.rsabitov.testchatpos.Domain.repository.ContactRepository;
+import com.rsabitov.testchatpos.Domain.repository.TopicRepository;
 import com.rsabitov.testchatpos.Domain.repository.MessageRepository;
 
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 public class IncomingMessageUseCase {
-    private ContactRepository mContactRepository;
+    private TopicRepository mTopicRepository;
     private MessageRepository mMessageRepository;
-    private int contactId;
+    private String topicName;
 
-    public IncomingMessageUseCase(ContactRepository contactRepository, MessageRepository messageRepository) {
-        this.mContactRepository = contactRepository;
+    public IncomingMessageUseCase(TopicRepository topicRepository, MessageRepository messageRepository) {
+        this.mTopicRepository = topicRepository;
         this.mMessageRepository = messageRepository;
     }
 
     public void handleIncomingMessage(String topic, MqttMessage message) {
-        if (isExistingContact(topic)) mMessageRepository.insert(new Message(message.toString(), contactId));
+        if (isExistingContact(topic)) mMessageRepository.insert(new Message(message.toString(), topicName));
         else {
-            Contact contact = new Contact(topic);
-            mContactRepository.insert(contact);
-            mMessageRepository.insert(new Message(message.toString(), contact.id));
+            Topic contact = new Topic(topic);
+            mTopicRepository.insert(contact);
+            mMessageRepository.insert(new Message(message.toString(), contact.name));
         }
     }
 
     private Boolean isExistingContact(String topic) {
         String contactName = topic.substring(0, topic.length() - 1);
-        for (Contact contact : mContactRepository.getAllContacts().getValue()) {
-            if (contact.name.equals(contactName)) contactId = contact.id;
+        for (Topic contact : mTopicRepository.getAllTopics().getValue()) {
+            if (contact.name.equals(contactName)) topicName = contact.name;
             return true;
         }
         return false;

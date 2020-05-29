@@ -18,10 +18,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.rsabitov.testchatpos.Domain.model.Contact;
+import com.rsabitov.testchatpos.Domain.model.Topic;
+import com.rsabitov.testchatpos.Domain.model.Message;
 import com.rsabitov.testchatpos.R;
-import com.rsabitov.testchatpos.UI.ViewModels.ContactsViewModel;
-import com.rsabitov.testchatpos.UI.ViewModels.MessagesViewModel;
+import com.rsabitov.testchatpos.UI.viewModels.ContactsViewModel;
+import com.rsabitov.testchatpos.UI.viewModels.MessagesViewModel;
 import com.rsabitov.testchatpos.UI.adapters.ContactsRecyclerViewAdapter;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerViewAd
 
     private MessagesViewModel mMessagesViewModel;
     private ContactsRecyclerViewAdapter mAdapter;
-    private List<Contact> mContactNames;
+    private List<Topic> mTopicNames;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -44,16 +45,20 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerViewAd
         ContactsViewModel mContactsViewModel = new ViewModelProvider(requireActivity()).get(ContactsViewModel.class);
         mMessagesViewModel = new ViewModelProvider(requireActivity()).get(MessagesViewModel.class);
         initRecyclerView(view);
-        mContactsViewModel.getAllContacts().observe(getViewLifecycleOwner(), contacts -> {
-            mAdapter.setContactsList(contacts);
-            mContactNames = contacts;
+        mContactsViewModel.getAllTopics().observe(getViewLifecycleOwner(), topicList -> {
+            mAdapter.setContactsList(topicList);
+            mTopicNames = topicList;
         });
         final FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.new_contact));
-        mContactsViewModel.getNewContact().observe(getViewLifecycleOwner(), s -> {
-            Toast.makeText(getContext(), "new message from " + s, Toast.LENGTH_SHORT).show();
-            //mContactsViewModel.insert(new Contact(s));
+
+        mContactsViewModel.getMessageFromThatContact().observe(getViewLifecycleOwner(), message -> {
+            Toast.makeText(getContext(), "new message from " + message.message, Toast.LENGTH_SHORT).show();
+            mContactsViewModel.insert(new Topic(message.topic));
+            mMessagesViewModel.setContactTopic(message.topic);
+            mMessagesViewModel.sendMessage(message);
         });
+
         return view;
     }
 
@@ -66,7 +71,7 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerViewAd
 
     @Override
     public void onViewClick(int position) {
-        mMessagesViewModel.setContactId(mContactNames.get(position).id);
+        mMessagesViewModel.setContactTopic(mTopicNames.get(position).name);
         Navigation.findNavController(getView()).navigate(R.id.messages);
     }
 

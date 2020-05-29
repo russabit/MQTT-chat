@@ -13,9 +13,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.rsabitov.testchatpos.Domain.model.Contact;
+import com.rsabitov.testchatpos.Domain.model.Topic;
 import com.rsabitov.testchatpos.R;
-import com.rsabitov.testchatpos.UI.ViewModels.ContactsViewModel;
+import com.rsabitov.testchatpos.UI.viewModels.ContactsViewModel;
 
 public class NewContactFragment extends Fragment {
 
@@ -29,7 +29,7 @@ public class NewContactFragment extends Fragment {
         final Button save = view.findViewById(R.id.save_button);
 
         save.setOnClickListener(v -> {
-            contactsViewModel.insert(new Contact(editText.getText().toString()));
+            contactsViewModel.insert(new Topic(editText.getText().toString()));
             Navigation.findNavController(getView()).navigate(R.id.contacts);
         });
 

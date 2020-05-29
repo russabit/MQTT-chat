@@ -18,7 +18,7 @@ import android.widget.EditText;
 
 import com.rsabitov.testchatpos.Domain.model.Message;
 import com.rsabitov.testchatpos.R;
-import com.rsabitov.testchatpos.UI.ViewModels.MessagesViewModel;
+import com.rsabitov.testchatpos.UI.viewModels.MessagesViewModel;
 import com.rsabitov.testchatpos.UI.adapters.MessagesRecyclerViewAdapter;
 
 public class MessagesFragment extends Fragment {
@@ -36,7 +36,7 @@ public class MessagesFragment extends Fragment {
         Button send = view.findViewById(R.id.send_button);
         textToSend = view.findViewById(R.id.text_to_send);
         send.setOnClickListener(v -> {
-            messagesViewModel.sendMessage(new Message(textToSend.getText().toString(), messagesViewModel.getContactId()));
+            messagesViewModel.sendMessage(new Message(textToSend.getText().toString(), messagesViewModel.getContactTopic()));
             textToSend.getText().clear();
         });
         return view;
