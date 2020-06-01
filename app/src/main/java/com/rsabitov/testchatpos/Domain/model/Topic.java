@@ -7,10 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Topic {
 
-    @PrimaryKey(autoGenerate = true)
-    public int id;
-
-    @NonNull
+    @PrimaryKey @NonNull
     public String name;
 
     public Topic(@NonNull String name) {

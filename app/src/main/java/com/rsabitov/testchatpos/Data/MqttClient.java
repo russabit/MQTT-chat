@@ -3,8 +3,6 @@ package com.rsabitov.testchatpos.Data;
 import android.content.Context;
 import android.util.Log;
 
-import com.rsabitov.testchatpos.Data.mqttDao.TopicMqttDao;
-import com.rsabitov.testchatpos.Data.mqttDao.TopicMqttDaoImpl;
 import com.rsabitov.testchatpos.Data.mqttDao.MessageMqttDao;
 import com.rsabitov.testchatpos.Data.mqttDao.MessageMqttDaoImpl;
 
@@ -21,20 +19,8 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 public class MqttClient {
     private MqttAndroidClient mqttAndroidClient;
 
-    private TopicMqttDao mTopicMqttDao;
     private MessageMqttDao mMessageMqttDao;
 
-    public TopicMqttDao getContactMqttDao() {
-        if (mTopicMqttDao != null) {
-            return mTopicMqttDao;
-        }
-        else {
-            if (mTopicMqttDao == null) {
-                mTopicMqttDao = new TopicMqttDaoImpl(this);
-            }
-        }
-        return mTopicMqttDao;
-    }
     public MessageMqttDao getMessageMqttDao() {
         if (mMessageMqttDao != null) {
             return mMessageMqttDao;

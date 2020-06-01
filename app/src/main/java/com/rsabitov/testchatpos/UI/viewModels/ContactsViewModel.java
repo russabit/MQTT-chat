@@ -32,10 +32,6 @@ public class ContactsViewModel extends AndroidViewModel {
 
     public void insert(Topic topic) { mTopicRepository.insert(topic); }
 
-    public LiveData<Topic> getNewTopic() {
-        return mTopicRepository.getIncomingTopicName();
-    }
-
     public Topic getContactByName(String name) {
         return mTopicRepository.getTopicByName(name);
     }

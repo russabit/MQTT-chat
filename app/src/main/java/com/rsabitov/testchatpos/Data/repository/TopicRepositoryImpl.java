@@ -5,7 +5,6 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.rsabitov.testchatpos.Data.ChatDatabase;
-import com.rsabitov.testchatpos.Data.mqttDao.TopicMqttDao;
 import com.rsabitov.testchatpos.Data.MqttClient;
 import com.rsabitov.testchatpos.Data.mqttDao.MessageMqttDao;
 import com.rsabitov.testchatpos.Data.roomDao.TopicDao;
@@ -18,7 +17,6 @@ import java.util.List;
 public class TopicRepositoryImpl implements TopicRepository {
     private TopicDao mTopicDao;
     private LiveData<List<Topic>> mAllTopics;
-    private TopicMqttDao mTopicMqttDao;
     private MessageMqttDao mMessageMqttDao;
 
     public TopicRepositoryImpl(Application application) {
@@ -27,7 +25,6 @@ public class TopicRepositoryImpl implements TopicRepository {
         mAllTopics = mTopicDao.getAll();
 
         MqttClient mqttClient = MqttClient.getInstance(application);
-        mTopicMqttDao = mqttClient.getContactMqttDao();
         mMessageMqttDao = mqttClient.getMessageMqttDao();
     }
 
@@ -47,21 +44,7 @@ public class TopicRepositoryImpl implements TopicRepository {
     }
 
     @Override
-    public LiveData<Topic> getIncomingTopicName() {
-        return mTopicMqttDao.getIncomingTopic();
-    }
-
-    @Override
     public LiveData<Message> getIncomingMessageFromThatTopic() {
         return mMessageMqttDao.getIncomingMessage();
     }
-
-/*    private Boolean isExistingContact(String topic) {
-        String contactName = topic.substring(0, topic.length() - 1);
-        for (Contact contact : getAllContacts().getValue()) {
-            //if (contact.name.equals(contactName)) contactId = contact.id;
-            return true;
-        }
-        return false;
-    }*/
 }

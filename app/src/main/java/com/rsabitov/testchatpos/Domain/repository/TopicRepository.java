@@ -13,7 +13,6 @@ public interface TopicRepository {
     LiveData<List<Topic>> getAllTopics();
     void insert(Topic topic);
     Topic getTopicByName(String name);
-    LiveData<Topic> getIncomingTopicName();
     LiveData<Message> getIncomingMessageFromThatTopic();
     /*void update(Topic topic);
     void delete(Topic topic);
