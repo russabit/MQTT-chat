@@ -40,4 +40,6 @@ public class MessagesViewModel extends AndroidViewModel {
     public LiveData<Message> getNewMessage() {
         return mMessageRepository.getIncomingMessage();
     }
+
+    public void deleteTopicMessages(String topic) { mMessageRepository.deleteTopicMessages(topic);}
 }

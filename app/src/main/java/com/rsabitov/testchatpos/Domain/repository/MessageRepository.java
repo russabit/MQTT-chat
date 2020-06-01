@@ -12,4 +12,5 @@ public interface MessageRepository {
     LiveData<List<Message>> getMessageByTopic(String topic);
     void insert(Message message);
     LiveData<Message> getIncomingMessage();
+    void deleteTopicMessages(String topic);
 }

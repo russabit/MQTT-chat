@@ -17,8 +17,6 @@ import java.util.List;
 
 public class ContactsViewModel extends AndroidViewModel {
     private TopicRepository mTopicRepository;
-    //private IncomingMessageUseCase mIncomingMessageUseCase;
-    //private int contactId;
 
     private LiveData<List<Topic>> mAllContacts;
 
@@ -36,7 +34,11 @@ public class ContactsViewModel extends AndroidViewModel {
         return mTopicRepository.getTopicByName(name);
     }
 
-    public LiveData<Message> getMessageFromThatContact() {
+    public LiveData<Message> getMessageFromThatTopic() {
         return mTopicRepository.getIncomingMessageFromThatTopic();
+    }
+
+    public void deleteTopic(Topic topic) {
+        mTopicRepository.delete(topic);
     }
 }

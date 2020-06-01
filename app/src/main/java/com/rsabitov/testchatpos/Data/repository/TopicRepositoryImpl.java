@@ -47,4 +47,9 @@ public class TopicRepositoryImpl implements TopicRepository {
     public LiveData<Message> getIncomingMessageFromThatTopic() {
         return mMessageMqttDao.getIncomingMessage();
     }
+
+    @Override
+    public void delete(Topic topic) {
+        ChatDatabase.databaseWriteExecutor.execute(() -> mTopicDao.delete(topic));
+    }
 }

@@ -21,4 +21,7 @@ public interface MessageDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Message message);
+
+    @Query("DELETE FROM message WHERE topic = :topic")
+    void delete(String topic);
 }

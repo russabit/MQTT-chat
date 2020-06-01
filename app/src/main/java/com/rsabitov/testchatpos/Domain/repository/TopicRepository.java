@@ -14,7 +14,7 @@ public interface TopicRepository {
     void insert(Topic topic);
     Topic getTopicByName(String name);
     LiveData<Message> getIncomingMessageFromThatTopic();
-    /*void update(Topic topic);
     void delete(Topic topic);
+    /*void update(Topic topic);
     void deleteAll();*/
 }
