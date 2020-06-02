@@ -1,8 +1,6 @@
 package com.rsabitov.testchatpos.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import android.os.Bundle;
 

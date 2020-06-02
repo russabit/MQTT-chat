@@ -53,8 +53,8 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerViewAd
         final FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.new_contact));
 
-        mContactsViewModel.getMessageFromThatTopic().observe(getViewLifecycleOwner(), message -> {
-            Toast.makeText(getContext(), "new message from " + message.message, Toast.LENGTH_SHORT).show();
+        mContactsViewModel.getMessageFromThatTopic().observe(getActivity(), message -> {
+            Toast.makeText(getContext(),  "'" + message.message + "'" + " from " + message.topic, Toast.LENGTH_SHORT).show();
             mContactsViewModel.insert(new Topic(message.topic));
             mMessagesViewModel.setContactTopic(message.topic);
             mMessagesViewModel.sendMessage(message);
