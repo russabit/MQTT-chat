@@ -59,7 +59,7 @@ public class ContactsFragment extends Fragment implements ContactsRecyclerViewAd
             mMessagesViewModel.setContactTopic(message.topic);
             mMessagesViewModel.sendMessage(message);
         });
-
+        getActivity().setTitle("Topics");
         return view;
     }
 

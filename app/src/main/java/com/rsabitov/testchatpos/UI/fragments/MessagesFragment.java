@@ -39,6 +39,7 @@ public class MessagesFragment extends Fragment {
             messagesViewModel.sendMessage(new Message(textToSend.getText().toString(), messagesViewModel.getContactTopic()));
             textToSend.getText().clear();
         });
+        getActivity().setTitle(messagesViewModel.getContactTopic());
         return view;
     }
 
