@@ -29,7 +29,9 @@ public class NewContactFragment extends Fragment {
         final Button save = view.findViewById(R.id.save_button);
 
         save.setOnClickListener(v -> {
-            contactsViewModel.insert(new Topic(editText.getText().toString()));
+            String topicName = editText.getText().toString();
+            contactsViewModel.insert(new Topic(topicName));
+            contactsViewModel.subscribeToTopic(topicName);
             Navigation.findNavController(getView()).navigate(R.id.contacts);
         });
 

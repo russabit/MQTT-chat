@@ -35,6 +35,7 @@ public class MqttClient {
 
     private final String serverUri = "tcp://broker.mqttdashboard.com:1883"; //in the form of tcp://server:port
 
+    //TODO: generate each clientId
     private final String clientId = "ruslan";
     private final String subscriptionTopic = "roosy/+";
     //final String username = "";
@@ -101,7 +102,7 @@ public class MqttClient {
                     disconnectedBufferOptions.setPersistBuffer(false);
                     disconnectedBufferOptions.setDeleteOldestMessages(false);
                     mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
-                    subscribeToTopic();
+                    subscribeToTopic(subscriptionTopic);
                 }
 
                 @Override
@@ -114,12 +115,12 @@ public class MqttClient {
         }
     }
 
-    private void subscribeToTopic() {
+    public void subscribeToTopic(String topic) {
         try {
-            mqttAndroidClient.subscribe(subscriptionTopic, 0, null, new IMqttActionListener() {
+            mqttAndroidClient.subscribe(topic, 0, null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    Log.w("Mqtt","Subscribed!");
+                    Log.w("Mqtt " + topic,"Subscribed!");
                 }
 
                 @Override
@@ -128,7 +129,6 @@ public class MqttClient {
                 }
             });
         } catch (MqttException ex) {
-            System.err.println("Exceptionst subscribing");
             ex.printStackTrace();
         }
     }

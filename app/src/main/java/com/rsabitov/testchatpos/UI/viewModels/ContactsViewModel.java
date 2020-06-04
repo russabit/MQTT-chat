@@ -41,4 +41,8 @@ public class ContactsViewModel extends AndroidViewModel {
     public void deleteTopic(Topic topic) {
         mTopicRepository.delete(topic);
     }
+
+    public void subscribeToTopic(String topic) {
+        mTopicRepository.subscribeToTopic(topic);
+    }
 }

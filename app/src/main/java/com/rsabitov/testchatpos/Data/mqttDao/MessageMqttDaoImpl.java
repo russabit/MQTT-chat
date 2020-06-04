@@ -43,4 +43,9 @@ public class MessageMqttDaoImpl implements MessageMqttDao {
         });
         return incomingMessage;
     }
+
+    @Override
+    public void subscribeToTopic(String topic) {
+        mqttClient.subscribeToTopic(topic);
+    }
 }

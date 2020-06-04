@@ -52,4 +52,9 @@ public class TopicRepositoryImpl implements TopicRepository {
     public void delete(Topic topic) {
         ChatDatabase.databaseWriteExecutor.execute(() -> mTopicDao.delete(topic));
     }
+
+    @Override
+    public void subscribeToTopic(String topic) {
+        mMessageMqttDao.subscribeToTopic(topic);
+    }
 }
