@@ -49,4 +49,9 @@ public class MessageRepositoryImpl implements MessageRepository {
         ChatDatabase.databaseWriteExecutor.execute(() -> mMessageDao.delete(topic));
     }
 
+    @Override
+    public void publishMessage(String topic, String message) {
+        mMessageMqttDao.publishToTopic(topic, message);
+    }
+
 }

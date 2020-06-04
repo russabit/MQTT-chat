@@ -36,7 +36,8 @@ public class MessagesFragment extends Fragment {
         Button send = view.findViewById(R.id.send_button);
         textToSend = view.findViewById(R.id.text_to_send);
         send.setOnClickListener(v -> {
-            messagesViewModel.sendMessage(new Message(textToSend.getText().toString(), messagesViewModel.getContactTopic()));
+            //messagesViewModel.sendMessage(new Message(textToSend.getText().toString(), messagesViewModel.getContactTopic()));
+            messagesViewModel.publishMessage(textToSend.getText().toString());
             textToSend.getText().clear();
         });
         getActivity().setTitle(messagesViewModel.getContactTopic());

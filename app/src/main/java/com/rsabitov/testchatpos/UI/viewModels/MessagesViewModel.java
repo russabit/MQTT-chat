@@ -42,4 +42,8 @@ public class MessagesViewModel extends AndroidViewModel {
     }
 
     public void deleteTopicMessages(String topic) { mMessageRepository.deleteTopicMessages(topic);}
+
+    public void publishMessage(String message) {
+        mMessageRepository.publishMessage(mTopic, message);
+    }
 }

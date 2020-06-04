@@ -15,6 +15,7 @@ import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.MqttPersistenceException;
 
 public class MqttClient {
     private MqttAndroidClient mqttAndroidClient;
@@ -130,6 +131,16 @@ public class MqttClient {
             });
         } catch (MqttException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    public void publishMessageToTopic(String topic, String message) {
+        try {
+            mqttAndroidClient.publish(topic, new MqttMessage(message.getBytes()));
+        } catch (MqttPersistenceException e) {
+            e.printStackTrace();
+        } catch (MqttException e) {
+            e.printStackTrace();
         }
     }
 }

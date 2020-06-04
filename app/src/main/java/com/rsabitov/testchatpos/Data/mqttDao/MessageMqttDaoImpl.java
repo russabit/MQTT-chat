@@ -48,4 +48,10 @@ public class MessageMqttDaoImpl implements MessageMqttDao {
     public void subscribeToTopic(String topic) {
         mqttClient.subscribeToTopic(topic);
     }
+
+    @Override
+    public void publishToTopic(String topic, String message) {
+        mqttClient.publishMessageToTopic(topic, message);
+    }
+
 }

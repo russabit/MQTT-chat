@@ -6,4 +6,5 @@ import com.rsabitov.testchatpos.Domain.model.Message;
 public interface MessageMqttDao {
     LiveData<Message> getIncomingMessage();
     void subscribeToTopic(String topic);
+    void publishToTopic(String topic, String message);
 }
